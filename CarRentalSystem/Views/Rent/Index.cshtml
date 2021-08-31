@@ -27,7 +27,7 @@
 
         <div class="form-group">
             <label class="form-label">Customer Name</label>
-            <input type="text" id="custid" name="custid" class="form-control" placeholder="CustName" required />
+            <input type="text" id="custname" name="custname" class="form-control" placeholder="CustName" required />
         </div>
 
         <div class="form-group">
@@ -69,7 +69,7 @@
         function getCar() {
             $.ajax({
                 type: 'GET',
-                url: 'rent/Getcar',
+                url: '/rent/Getcar',
                 dataType: 'JSON',
                 success: function (data) {
                     console.log(data);
@@ -85,6 +85,38 @@
 
             });
         }
+
+        getCustomer();
+
+        function getCustomer() {
+
+            $("custid").keyup(function (e) {
+
+                $.ajax({
+
+                type: 'POST',
+                url: '/rent/Getid?id=' + $("#custid").val(),
+                dataType: 'JSON',
+                    success: function (data) {
+
+                        $("#custname").val(data)
+                    }
+
+                        });
+                
+
+
+            });
+        }
+
+
+
+
+
+
+
+
+
     </script>
         }
     

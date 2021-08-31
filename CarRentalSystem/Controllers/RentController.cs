@@ -25,5 +25,15 @@ namespace CarRentalSystem.Controllers
 
             return Json(car, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        public ActionResult Getid(int id)
+        {
+            var customer = (from s in db.customers where s.Id == id select s.custname).ToList();
+
+            return Json(customer, JsonRequestBehavior.AllowGet);
+        }
+
+
     }
 }
