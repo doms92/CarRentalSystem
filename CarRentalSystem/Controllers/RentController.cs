@@ -34,6 +34,15 @@ namespace CarRentalSystem.Controllers
             return Json(customer, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        public ActionResult Getavil(String carno)
+        {
+            var caravil = (from s in db.carregs where s.carno == carno select s.available_).FirstOrDefault();
+
+
+            return Json(caravil, JsonRequestBehavior.AllowGet);
+        }
+
 
     }
 }
