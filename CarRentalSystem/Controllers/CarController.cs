@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -51,7 +52,11 @@ namespace CarRentalSystem.Controllers
             if (ModelState.IsValid)
             {
                 db.carregs.Add(carreg);
-                db.SaveChanges();
+
+                
+                    db.SaveChanges();
+                
+              
                 return RedirectToAction("Index");
             }
 
