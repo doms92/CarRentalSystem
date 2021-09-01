@@ -1,6 +1,7 @@
 ﻿using CarRentalSystem.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -41,6 +42,27 @@ namespace CarRentalSystem.Controllers
 
 
             return Json(caravil, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult Save(rental rent)
+        {
+
+            if (ModelState.IsValid)
+            {
+                db.rentals.Add(rent);
+
+                var car = db.carregs.SingleOrDefault(e => e.carno == rent.carid);
+                if (car == null)
+                    return HttpNotFound("CarNo is not valid");
+
+                car.available_ = "no";
+                db.Entry(car).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(rent);
         }
 
 

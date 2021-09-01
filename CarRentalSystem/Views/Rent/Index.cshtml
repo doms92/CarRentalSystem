@@ -6,7 +6,7 @@
 <h2>Index</h2>
 
 <div class="row">
-    @using (Html.BeginForm("Save", "rent", FormMethod.Post, new { id = "popupForm" }))
+    @using (Html.BeginForm("Save", "rent", FormMethod.Post,new{ id = "popupForm" }))
     {
         <div>
             <h1>Car Rental</h1>
@@ -14,7 +14,7 @@
 
         <div class="form-group">
             <label class="form-label">Car no</label>
-            <select class="form-control" id="carno" name="carno" placeholder="CarNo" required>
+            <select class="form-control" id="carid" name="carid" placeholder="CarNo" required>
                 <option>Please Select</option>
             </select>
 
@@ -86,7 +86,7 @@
 
                     for (var i = 0; i < data.length; i++)
                     {
-                        $("#carno").append($("<option/>", {
+                        $("#carid").append($("<option/>", {
                             text: data[i].carno
                         }));
                     }
@@ -97,7 +97,7 @@
             });
         }
 
-        $("#carno").change(function ()
+        $("#carid").change(function ()
         {
             available();
 
@@ -110,7 +110,7 @@
             $.ajax({
 
                 type: 'POST',
-                url: '/rent/Getavil?carno=' + $("#carno").val(),
+                url: '/rent/Getavil?carno=' + $("#carid").val(),
                 dataType: 'JSON',
                 success: function (data) {
                     console.log(data)
